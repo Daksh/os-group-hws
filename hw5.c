@@ -62,9 +62,10 @@ int main(){
 		char* const args[] = {"/bin/ls", NULL};
 		/* write your code here 
 		Close STDOUT*/
-		close(fd[0]);//non-essential
 		close(1);//Closing STDOUT
 		dup(fd[1]);//Duplicating Write end of pipe (to 1)
+		close(fd[0]);//Closing read end of pipe
+		close(fd[1]);//Closing write end of pipe
 
 		ret = execv (args[0], args);
 		/* NOT REACHED*/
@@ -75,12 +76,15 @@ int main(){
 		char* const args[] = {"/usr/bin/wc", "-l", NULL};
 		/* write your code here 
 		Close STDIN*/
-		close(fd[1]);//ESSENTIAL, OTHERWISE CODE WONT STOP
-		close(0); //Closing STDIN
-		dup(fd[0]);//Duplicating Read end of pipe (to 0)
 
+		close(0); //Closing STDIN
+		dup(fd[0]);//Duplicating Read end of pipe (to 0)	
+		
+		/*read blocks until it is impossible to write new data to the pipe*/
+		close(fd[1]);// Essential, closing the write end of the pipe
+		
 		execv (args[0], args);
-		// close(fd[0]);
+		close(fd[0]);
 		
 		/* NOT REACHED*/
 		printf ("failed to exec wc\n");

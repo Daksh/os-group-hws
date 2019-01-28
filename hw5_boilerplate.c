@@ -1,4 +1,4 @@
-/*
+	/*
 Homework 5: Pipes
 
 The goal of this homework is to understand the pipe command in shell. The
@@ -26,6 +26,10 @@ int main(){
 		/* to verify run: which ls */
 		char* const args[] = {"/bin/ls", NULL};
 		/* write your code here */
+		close(1);
+		dup(fd[1]);// child dups the write end onto the write end of the pipe
+		close(fd[0]);
+		close(fd[1]);
 		ret = execv (args[0], args);
 		/* NOT REACHED*/
 		printf ("failed to exec ls\n");
@@ -35,6 +39,9 @@ int main(){
 		/* to verify run: which wc */
 		char* const args[] = {"/usr/bin/wc", "-l", NULL};
 		/* write your code here */
+		close(0);
+		dup(fd[0]);
+		close(fd[1]);
 		execv (args[0], args);
 		/* NOT REACHED*/
 		printf ("failed to exec wc\n");
