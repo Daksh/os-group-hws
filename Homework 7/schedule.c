@@ -47,7 +47,7 @@ schedule (int signal)
 		printf ("no thread to schedule!\n");
 		exit (0);
 	}
-	alarm (1);
+	//alarm (1);
 	if (nextThread != curThread) {
 		cur = curThread;
 		curThread = nextThread;
@@ -78,7 +78,7 @@ default_handler (void(*fnptr)(), int *valid)
 {
 	fnptr ();
 	valid[0] = 0;
-	kill (getpid(), SIGALRM);
+	kill (getpid(), SIGINT);
 }
 
 int
@@ -118,12 +118,12 @@ create_thread (void(*fnptr)())
 int main ()
 {
 	create_context (&errContext, errorfn, NULL);
-	signal (SIGALRM, schedule);
+	signal (SIGINT, schedule);
 	memset (listThreads, 0, sizeof(listThreads));
 	create_thread (thread1);
 	create_thread (thread2);
 	curThread = &listThreads[0];
-	alarm (1);
+	//alarm (1);
 	setcontext (&curThread->context);
 	return 0;
 }
