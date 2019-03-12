@@ -27,7 +27,7 @@ void read_file(void * mappedMemory, char * buf) {
     char str[PAGE_SIZE];
 
     for (i = 0; i < NUM_PAGES; i++) {
-        if (memcmp(mappedMemory, buf, PAGE_SIZE) != 0) {
+        if (memcmp(((char*)mappedMemory)+i*PAGE_SIZE, buf, PAGE_SIZE) != 0) {
             printf("data don’t match\n");
             exit(0);
         }
