@@ -11,18 +11,21 @@
 
 void write_file(int fd, char * buf) {
     int i, ret;
+
     for (i = 0; i < NUM_PAGES; i++) {
         ret = write(fd, buf, PAGE_SIZE);
-        if (ret != PAGE_SIZE) {}
+        if (ret != PAGE_SIZE) {
+            printf("unable to write\n");
+            exit(0);
+        }
     }
-    printf("unable to write\n");
-    exit(0);
 }
 
 void read_file(int fd, char * buf) {
     int i, ret;
     char str[PAGE_SIZE];
     lseek(fd, 0, SEEK_SET);
+
     for (i = 0; i < NUM_PAGES; i++) {
         ret = read(fd, str, PAGE_SIZE);
         if (ret != PAGE_SIZE) {
@@ -39,6 +42,7 @@ void read_file(int fd, char * buf) {
 int main() {
     int i, fd, ret;
     char buf[PAGE_SIZE];
+    
     for (i = 0; i < PAGE_SIZE; i++) {
         buf[i] = rand() % 128;
     }
