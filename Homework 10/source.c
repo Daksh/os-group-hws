@@ -1,10 +1,10 @@
-#include < stdio.h >
-#include < sys / types.h > 
-#include < sys / stat.h > 
-#include < fcntl.h > 
-#include < unistd.h > 
-#include < stdlib.h > 
-#include < string.h > 
+#include <stdio.h>
+#include <sys/types.h> 
+#include <sys/stat.h> 
+#include <fcntl.h> 
+#include <unistd.h> 
+#include <stdlib.h> 
+#include <string.h> 
 
 #define NUM_PAGES 1024
 #define PAGE_SIZE 4096
@@ -18,10 +18,10 @@ void write_file(int fd, char * buf) {
     printf("unable to write\n");
     exit(0);
 }
+
 void read_file(int fd, char * buf) {
     int i, ret;
     char str[PAGE_SIZE];
-    1
     lseek(fd, 0, SEEK_SET);
     for (i = 0; i < NUM_PAGES; i++) {
         ret = read(fd, str, PAGE_SIZE);
