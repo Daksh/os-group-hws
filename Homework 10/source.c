@@ -24,7 +24,6 @@ void write_file(int fd, char * buf) {
 
 void read_file(void * mappedMemory, char * buf) {
     int i, ret;
-    char str[PAGE_SIZE];
 
     for (i = 0; i < NUM_PAGES; i++) {
         if (memcmp(((char*)mappedMemory)+i*PAGE_SIZE, buf, PAGE_SIZE) != 0) {
@@ -52,7 +51,7 @@ int main() {
     
     //Mapping the File to Memory
     //     mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset);
-    void * mappedMemory = mmap(NULL, NUM_PAGES*PAGE_SIZE, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0); 
+    void * mappedMemory = mmap(NULL, NUM_PAGES*PAGE_SIZE, PROT_READ, MAP_SHARED, fd, 0); 
     if(mappedMemory == (void *) -1)
         exit(1);
 
