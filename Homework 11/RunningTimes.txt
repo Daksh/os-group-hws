@@ -1,0 +1,16 @@
+
+---------without compile time-----
+clang
+500.perlbench_r		40 seconds
+502.gcc_r			10 seconds
+505.mcf_r			23 seconds
+525.x264_r			54 seconds
+557.xz_r			27 seconds
+
+
+gcc
+500.perlbench_r		45 seconds
+502.gcc_r			12 seconds
+505.mcf_r			22 seconds
+525.x264_r			74 seconds
+557.xz_r			26 seconds
