@@ -1,3 +1,18 @@
+======with compile time, lab Ubuntu ======
+clang
+500.perlbench_r		46 seconds
+502.gcc_r			72 seconds
+505.mcf_r			15 seconds
+525.x264_r			47 seconds
+557.xz_r			18 seconds
+
+gcc
+500.perlbench_r		52 seconds
+502.gcc_r			89 seconds
+505.mcf_r			14 seconds
+525.x264_r			61 seconds
+557.xz_r			17 seconds
+
 
 ---------without compile time-----
 clang
